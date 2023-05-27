@@ -8,12 +8,23 @@ import {
   faBolt,
   faBookOpen,
   faShoppingCart,
+  faStar,
+  faStarHalfAlt,
   faTags,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./index.css";
 
-library.add(faBars, faShoppingCart, faTimes, faBolt, faBookOpen, faTags);
+library.add(
+  faBars,
+  faShoppingCart,
+  faTimes,
+  faBolt,
+  faBookOpen,
+  faTags,
+  faStar,
+  faStarHalfAlt
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
