@@ -2,6 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Book({ book }) {
+  if (!book || !book.url) {
+    return null; // Render nothing if book or book.url is undefined
+  }
   return (
     <div className="book">
       <a href="/">
@@ -22,14 +25,16 @@ function Book({ book }) {
         <FontAwesomeIcon icon="star-half-alt" />
       </div>
       <div className="book__price">
-        {book.salePrice ? (
+        {book.salePrice ? ( //checking if book.sale price exists.
           <>
-            <span className="book__price--normal">${book.originalPrice}</span>$
-            {book.salePrice}
+            <span className="book__price--normal">
+              ${book.originalPrice.toFixed(2)}
+            </span>
+            ${book.salePrice.toFixed(2)}
           </>
-        ) : null}
-        <span className="book__price--normal">${book.originalPrice}</span>$
-        {book.salePrice}
+        ) : (
+          <>${book.originalPrice.toFixed(2)}</>
+        )}
       </div>
     </div>
   );

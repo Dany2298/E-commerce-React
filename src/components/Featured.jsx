@@ -5,7 +5,8 @@ import { books } from "../data.js";
 function Featured() {
   console.log(books); //logging the books datatset
   //filtering the books that only have a rating of 5 and then slicing the results to 4
-
+  const filteredBooks = books.filter((book) => book.rating === 5);
+  console.log(filteredBooks); // Check if the filtered array is logged correctly
   return (
     <section id="features">
       <div className="container">
