@@ -4,6 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faArrowLeft,
   faBars,
   faBolt,
   faBookOpen,
@@ -23,7 +24,8 @@ library.add(
   faBookOpen,
   faTags,
   faStar,
-  faStarHalfAlt
+  faStarHalfAlt,
+  faArrowLeft
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

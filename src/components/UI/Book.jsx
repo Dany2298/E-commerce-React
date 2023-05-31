@@ -1,5 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Rating from "./Rating";
+import Price from "./Price";
 
 function Book({ book }) {
   console.log(book);
@@ -8,36 +11,18 @@ function Book({ book }) {
   }
   return (
     <div className="book">
-      <a href="/">
+      <Link to={`/books/${book.id}`}>
         <figure className="book__img--wrapper">
           <img src={book.url} alt="" className="book__img" />
         </figure>
-      </a>
+      </Link>
       <div className="book__title">
-        <a href="/" className="book__title--link">
+        <Link to={`/books/${book.id}`} className="book__title--link">
           {book.title}
-        </a>
+        </Link>
       </div>
-      <div className="book__ratings">
-        {new Array(Math.floor(book.rating)).fill(0).map((_, index) => (
-          <FontAwesomeIcon icon="star" key={index} />
-        ))}
-        {!Number.isInteger(book.rating) && ( //if its not an integer then, print the half star icon
-          <FontAwesomeIcon icon="star-half-alt" />
-        )}
-      </div>
-      <div className="book__price">
-        {book.salePrice ? ( //checking if book.sale price exists.
-          <>
-            <span className="book__price--normal">
-              ${book.originalPrice.toFixed(2)}
-            </span>
-            ${book.salePrice.toFixed(2)}
-          </>
-        ) : (
-          <>${book.originalPrice.toFixed(2)}</>
-        )}
-      </div>
+      <Rating rating={book.rating} />
+      <Price originalPrice={book.originalPrice} salePrice={book.salePrice} />
     </div>
   );
 }
