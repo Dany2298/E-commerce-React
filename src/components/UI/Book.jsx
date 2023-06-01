@@ -5,7 +5,7 @@ import Rating from "./Rating";
 import Price from "./Price";
 
 function Book({ book }) {
-  console.log(book);
+  // console.log(book);
   if (!book || !book.url) {
     return null; // Render nothing if book or book.url is undefined
   }
