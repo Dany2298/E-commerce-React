@@ -1,14 +1,12 @@
-import Nav from "./components/Nav.jsx";
-import "./index.css";
-import Footer from "./components/Footer.jsx";
+import Footer from "./components/Footer";
+import React, { useEffect, useState } from "react";
+import Nav from "./components/Nav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./components/pages/Home.jsx";
-import Books from "./components/pages/Books.jsx";
-import { books } from "./data.js";
-import BookInfo from "./components/pages/BookInfo.jsx";
-import Cart from "./components/pages/Cart.jsx";
-import React, { useState } from "react";
-import { useEffect } from "react";
+import Books from "./components/pages/Books";
+import { books } from "./data";
+import BookInfo from "./components/pages/BookInfo";
+import Cart from "./components/pages/Cart";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -19,22 +17,20 @@ function App() {
 
   function changeQuantity(book, quantity) {
     setCart(
-      cart.map((item) => {
-        if (item.id === book.id) {
-          return {
-            ...item,
-            quantity: +quantity,
-          };
-        } else {
-          return item;
-        }
-      })
+      cart.map((item) =>
+        item.id === book.id
+          ? {
+              ...item,
+              quantity: +quantity,
+            }
+          : item
+      )
     );
   }
 
-  function removeBook(item) {
+  function removeItem(item) {
     setCart(cart.filter((book) => book.id !== item.id));
-    console.log("remove book", item);
+    console.log("removed", item);
   }
 
   function numberOfItems() {
@@ -48,6 +44,7 @@ function App() {
   useEffect(() => {
     console.log(cart);
   }, [cart]);
+
   return (
     <Router>
       <div className="App">
@@ -67,7 +64,7 @@ function App() {
               books={books}
               cart={cart}
               changeQuantity={changeQuantity}
-              removeBook={removeBook}
+              removeItem={removeItem}
             />
           )}
         />
@@ -76,5 +73,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;

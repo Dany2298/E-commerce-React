@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LibraryLogo from "../assets/Library.svg";
 import { Link } from "react-router-dom";
 
-const Nav = (numberOfItems) => {
+const Nav = ({ numberOfItems }) => {
   function openMenu() {
     document.body.classList += "menu--open";
   }
@@ -11,6 +11,7 @@ const Nav = (numberOfItems) => {
   function closeMenu() {
     document.body.classList.remove("menu--open");
   }
+
   return (
     <nav>
       <div className="nav__container">

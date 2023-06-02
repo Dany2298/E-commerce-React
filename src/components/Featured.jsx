@@ -1,12 +1,10 @@
 import React from "react";
 import Book from "./UI/Book";
-import { books } from "../data.js";
+import { books } from "../data";
 
-function Featured() {
-  console.log(books); //logging the books datatset
-  //filtering the books that only have a rating of 5 and then slicing the results to 4
-  const filteredBooks = books.filter((book) => book.rating === 5);
-  console.log(filteredBooks); // Check if the filtered array is logged correctly
+const Featured = () => {
+  console.log(books);
+  console.log();
   return (
     <section id="features">
       <div className="container">
@@ -21,14 +19,11 @@ function Featured() {
               .map((book) => (
                 <Book book={book} key={book.id} />
               ))}
-            <Book />
-            <Book />
-            <Book />
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Featured;

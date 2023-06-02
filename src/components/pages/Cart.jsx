@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import EmptyCart from "../../assets/empty_cart.svg";
 import { Link } from "react-router-dom";
 
-function Cart({ cart, changeQuantity, removeBook }) {
-  const [total, setTotal] = useState();
-  useEffect(() => {
+const Cart = ({ cart, changeQuantity, removeItem }) => {
+  const total = () => {
     let price = 0;
     cart.forEach((item) => {
-      price += +(item.salePrice || item.originalPrice * item.quantity);
+      price += +((item.salePrice || item.originalPrice) * item.quantity);
     });
-    setTotal(price);
-  }, [cart, cart.quantity]);
-
+    return price;
+  };
   return (
     <div id="books__body">
       <main id="books__main">
@@ -41,11 +39,11 @@ function Cart({ cart, changeQuantity, removeBook }) {
                             {book.title}
                           </span>
                           <span className="cart__book--price">
-                            ${(book.salePrice || book.originalPrice).toFixed(2)}
+                            {(book.salePrice || book.originalPrice).toFixed(2)}
                           </span>
                           <button
                             className="cart__book--remove"
-                            onClick={() => removeBook(book)}
+                            onClick={() => removeItem(book)}
                           >
                             Remove
                           </button>
@@ -76,9 +74,9 @@ function Cart({ cart, changeQuantity, removeBook }) {
               {cart.length === 0 && (
                 <div className="cart__empty">
                   <img src={EmptyCart} alt="" className="cart__empty--img" />
-                  <h2>You don't have any books in your cart!</h2>
+                  <h2>You dont have any books in your cart!</h2>
                   <Link to="/books">
-                    <button className="btn">Browse Books</button>
+                    <button className="btn">Browse books</button>
                   </Link>
                 </div>
               )}
@@ -87,23 +85,21 @@ function Cart({ cart, changeQuantity, removeBook }) {
               <div className="total">
                 <div className="total__item total__sub-total">
                   <span>Subtotal</span>
-                  <span>${(total * 0.9).toFixed(2)}</span>
+                  <span>${(total() * 0.9).toFixed(2)}</span>
                 </div>
                 <div className="total__item total__tax">
                   <span>Tax</span>
-                  <span>${(total * 0.1).toFixed(2)}</span>
+                  <span>${(total() * 0.1).toFixed(2)}</span>
                 </div>
                 <div className="total__item total__price">
                   <span>Total</span>
-                  <span>${total}</span>
+                  <span>${total().toFixed(2)}</span>
                 </div>
                 <button
                   className="btn btn__checkout no-cursor"
-                  onClick={() =>
-                    alert("Haven't gotten around to doing this yet :(")
-                  }
+                  onClick={() => alert(`Haven't got around to doing this :(`)}
                 >
-                  Proceed to Checkout
+                  Proceed to checkout
                 </button>
               </div>
             )}
@@ -112,6 +108,6 @@ function Cart({ cart, changeQuantity, removeBook }) {
       </main>
     </div>
   );
-}
+};
 
 export default Cart;
